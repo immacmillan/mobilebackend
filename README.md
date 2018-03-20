@@ -1,5 +1,7 @@
 # Node Project Template
+
 =================
+
 An example Express project with the following features:
 
 * AzureAD password-based authentication with JWTs
@@ -52,7 +54,7 @@ Multiple environmental variables are *required* to run the application:
 * `DPN_CLIENT_ID` - Deloitte People Network Client ID
 * `BASIC_AUTH_USERNAME` - Username for the reporting endpoint
 * `BASIC_AUTH_PASSWORD` - Password for the reporting endpoint
-* `MONGO_DB`- MongoDB connect string (optional, defaults to `mongodb://localhost:27017/techfluency`)
+* `MONGO_DB`- MongoDB connect string (optional, defaults to `mongodb://localhost:27017/goals`)
 
 ## Running
 

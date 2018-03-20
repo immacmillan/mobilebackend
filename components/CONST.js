@@ -34,7 +34,7 @@ module.exports = {
 		DPN_PROFILE_URL: 'https://people.m.us.deloitte.com/o/people/GetProfileDetail'
 	},
 	MONGO_DB: {
-		CONNECT_STRING: process.env.MONGO_DB || 'mongodb://localhost:27017/node-project'
+		CONNECT_STRING: process.env.MONGO_DB || 'mongodb://localhost:27017/goals'
 	},
   SIGNALS: {
     AUTH_SUCCESS: 'authentication succeeded',
