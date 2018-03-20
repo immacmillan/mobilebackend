@@ -31,7 +31,8 @@ module.exports = {
 		DPN_CLIENT_ID: process.env.DPN_CLIENT_ID,
 		OAUTH_URL: `https://login.microsoftonline.com/${process.env.AZURE_DIRECTORY_ID}`,
 		DPN_AUTH_TOKEN_URL: 'https://auth.m.us.deloitte.com/OAuth/V2/Token',
-		DPN_PROFILE_URL: 'https://people.m.us.deloitte.com/o/people/GetProfileDetail'
+		DPN_PROFILE_URL: 'https://people.m.us.deloitte.com/o/people/GetProfileDetail',
+		PORT: process.env.PORT || 7000
 	},
 	MONGO_DB: {
 		CONNECT_STRING: process.env.MONGO_DB || 'mongodb://localhost:27017/goals'
