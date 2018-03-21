@@ -1,5 +1,4 @@
 'use strict';
-
 require('app-module-path').addPath(__dirname + '/');
 
 let express = require('express');
@@ -8,6 +7,7 @@ let mongoConnection = require('components/mongoConnection');
 const CONST = require('components/CONST');
 
 require('./config/conf')(app);
+require('./config/session')(app);
 require('./config/passport')(app);
 
 require('./routes')(app);

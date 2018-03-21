@@ -10,21 +10,11 @@ const CONST = require('components/CONST.js'),
  */
 function errorHandler(err, req, res, next) {		//eslint-disable-line
 	//Don't log not authorized errors
-	let errorName = err.name ? err.name : 'Error';
-
 	if (err.status !== 401) {
 		let errorObj = {
 			error: err
 		};
-
-		const unique_name = req.token ? req.token.unique_name : null;
-		if (unique_name) {
-			errorObj.user = unique_name;
-		}
-
-		if (req.ip) {
-			errorObj.ip = req.ip;
-		}
+		let errorName = err.name ? err.name : 'Error';
 
 		logger.error(errorName, errorObj);
 	}
