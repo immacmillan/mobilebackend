@@ -12,6 +12,8 @@ module.exports = function(app) {
 	app.use(cors);
 
 	app.post('/login', require('./login'));
+	app.post('/logout', require('./logout'));
+	app.post('/addUser', require('./AddUser'));
 
 	/**
 	* Example of CRUD endpoints backed by Mongoose

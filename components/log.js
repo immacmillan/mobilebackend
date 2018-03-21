@@ -5,7 +5,7 @@ const winston = require('winston'),
 require('winston-mongodb');
 
 const mongo_options = {
-	db: CONST.MONGO_DB.CONNECT_STRING
+	db: CONST.ENV.MONGO_DB
 };
 
 /**

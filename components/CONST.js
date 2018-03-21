@@ -24,18 +24,9 @@ module.exports = {
     FORM: 'application/x-www-form-urlencoded'
 	},
 	ENV: {
-		AZURE_DIRECTORY_ID: process.env.AZURE_DIRECTORY_ID,
-		AZURE_CLIENT_ID: process.env.AZURE_CLIENT_ID,
-		AZURE_CLIENT_SECRET: process.env.AZURE_CLIENT_SECRET,
-		DPN_CLIENT_SECRET: process.env.DPN_CLIENT_SECRET,
-		DPN_CLIENT_ID: process.env.DPN_CLIENT_ID,
-		OAUTH_URL: `https://login.microsoftonline.com/${process.env.AZURE_DIRECTORY_ID}`,
-		DPN_AUTH_TOKEN_URL: 'https://auth.m.us.deloitte.com/OAuth/V2/Token',
-		DPN_PROFILE_URL: 'https://people.m.us.deloitte.com/o/people/GetProfileDetail',
+		DEFAULT_TIMEOUT_MINUTES: process.env.DEFAULT_TIMEOUT_MINUTES || 30,
+		MONGO_DB: process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/node-project',
 		PORT: process.env.PORT || 7000
-	},
-	MONGO_DB: {
-		CONNECT_STRING: process.env.MONGO_DB || 'mongodb://localhost:27017/goals'
 	},
   SIGNALS: {
     AUTH_SUCCESS: 'authentication succeeded',
