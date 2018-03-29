@@ -15,6 +15,7 @@ module.exports = function(app) {
 	* serializing, and querying the user record by ID from the database when
 	* deserializing.
 	*/
+	
 	passport.serializeUser((user, cb) => {
 		cb(null, user.id);
 	});
