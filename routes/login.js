@@ -19,7 +19,8 @@ module.exports = function login(req, res, next) {
 					status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
 					error: {
 						success: false,
-						message: CONST.SIGNALS.AUTH_FAILED
+						message: CONST.SIGNALS.AUTH_FAILED,
+						failureFlash: "Invalid Username or Password"
 					}
 				});
 			} else {
