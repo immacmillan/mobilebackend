@@ -38,11 +38,11 @@ module.exports = function(app) {
 		{usernameField: 'email'},
 		function(email, password, done) {
 			User.findOne({ email: email }).then((user) => {
-				if (!user) { return done(null, false); }
+				if (!user) { return done(null, false,{message:'Wrong Email'}); }
 
 				return user.validatePassword(password).then((isMatch) => {
 					if(!isMatch) {
-						return done(null, false);
+						return done(null, false,{message:"Wrong Password"});
 					} else {
 						return done(null, user);
 					}

@@ -9,7 +9,7 @@ const CONST = require('components/CONST.js');
  * Then generates a session
  */
 module.exports = function login(req, res, next) {
-	passport.authenticate('local', function(err, user) {
+	passport.authenticate('local', function(err, user,info) {
 		if (err) {
 			return next(err);
 		} else {
@@ -19,14 +19,21 @@ module.exports = function login(req, res, next) {
 					status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
 					error: {
 						success: false,
-						message: CONST.SIGNALS.AUTH_FAILED,
-						failureFlash: "Invalid Username or Password"
-					}
+						message:CONST.SIGNALS.AUTH_FAILED
+					},
+					info:info
 				});
 			} else {
 				req.login(user, function(err) {
 					if (err) {
-						next(err);
+						return next({
+							status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
+							error:{
+								success:false,
+								message:CONST.SIGNALS.AUTH_FAILED
+							},
+							info:info
+						});
 					} else {
 						res.send({success: true, message: CONST.SIGNALS.AUTH_SUCCESS});
 					}
