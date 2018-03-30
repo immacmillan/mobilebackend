@@ -3,7 +3,7 @@ let mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
     validator = require('validator')
 /**
- * Example User Schema with a username and password field
+ * Example User Schema with a firstname, lastname, email, and password field
  */
 var UserSchema = mongoose.Schema({
     firstname: { 
@@ -21,7 +21,8 @@ var UserSchema = mongoose.Schema({
             validator: validator.isEmail,
             message: '{VALUE} is not a valid email',
             isAsync: false
-        }
+        },
+        unique:true
     },    
     password: {
         type: String, 

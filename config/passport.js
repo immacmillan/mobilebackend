@@ -35,6 +35,7 @@ module.exports = function(app) {
 	* will be set at `req.user` in route handlers after authentication.
 	*/
 	let localStrategy = new LocalStrategy(
+		{usernameField: 'email'},
 		function(email, password, done) {
 			User.findOne({ email: email }).then((user) => {
 				if (!user) { return done(null, false); }
