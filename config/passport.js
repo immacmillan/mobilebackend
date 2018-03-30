@@ -42,7 +42,7 @@ module.exports = function(app) {
 
 				return user.validatePassword(password).then((isMatch) => {
 					if(!isMatch) {
-						return done(null, false,{message:"Wrong Password"});
+						return done(null, false,{message:'Wrong Password'});
 					} else {
 						return done(null, user);
 					}
