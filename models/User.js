@@ -1,12 +1,37 @@
 'use strict';
 let mongoose = require('mongoose'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    validator = require('validator')
 /**
- * Example User Schema with a username and password field
+ * Example User Schema with a firstname, lastname, email, and password field
  */
 var UserSchema = mongoose.Schema({
-  username: { type: String, required: true, index: { unique: true } },
-  password: { type: String, required: true }
+    firstname: { 
+            type: String, 
+            required: true
+    },
+    lastname: {
+            type: String,
+            required: true
+    },
+    email: {
+        type: String, 
+        required:true, 
+        validate:{
+            validator: validator.isEmail,
+            message: '{VALUE} is not a valid email',
+            isAsync: false
+        },
+        unique:true
+    },    
+    password: {
+        type: String, 
+        required: true 
+        },
+    created:{
+        type:Date, 
+        default: Date.now
+        }
 });
 
 /**

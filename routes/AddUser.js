@@ -11,7 +11,9 @@ const CONST = require('components/CONST.js');
 module.exports = function example(req, res, next) {
 	var user = new User(
 		{
-			username: req.body.username,
+			firstname: req.body.firstname,
+			lastname: req.body.lastname,
+			email: req.body.email,
 			password: req.body.password
 		}
 	);
