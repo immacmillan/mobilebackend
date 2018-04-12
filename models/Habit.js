@@ -12,7 +12,7 @@ var HabitSchema = mongoose.Schema({
         ref: 'User'
     }],
 	description: String,
-	habittype: {
+	habittype: { 			// removed from latest strategic direction, only simple
         type: String,
         enum: ['Simple', 'Complex']
     },
@@ -22,26 +22,27 @@ var HabitSchema = mongoose.Schema({
     },
 	startdate: {
 		type: Date,
-		default: Date.now() + 86400000 //this is to make it so the default start date is the next day?
+		default: Date.now() + 86400000 //this is to make it so the default start date is the next day
 	},
 	targetenddate: {
-		type: Date
+		type: Date,
+		default: Date.now() + 1814000000 //this is to account for all simple habits ending 21 days after today by default.
 	},
 	actualenddate: {
-		type: Date
+		type: Date 
 	},
 	dailyremindertime: { 
 		type: Date // might need to add validators depending on when Date.now() = xxx?
 	},
 	weeklyremindertime: {
-		type: Date
+		type: Date // might not be needed
 	},
 	customreminderinfo: {
-		type: Date,
+		type: Date, // might not be needed
 	},
 	streakcounter: {
 		type: Number,
-		default: 1
+		default: 1 // used for tracking how many continous days a Habit is performed
 	},
 	date: {
 		type: Date,
