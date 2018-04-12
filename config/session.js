@@ -3,7 +3,9 @@ const crypto = require('crypto'),
 	session = require('express-session'),
 	CONST = require('components/CONST'),
 	utils = require('components/utilities'),
-	MongoStore = require('connect-mongo')(session);
+	MongoStore = require('connect-mongo')(session),
+	async = require('async'),
+	flash = require('express-flash');
 
 /**
  * Use Express Session and Mongo Store for session management
@@ -31,6 +33,6 @@ module.exports = function(app) {
 		secret: crypto.randomBytes(64).toString('hex'), //@TODO Change to static string if this needs to scale horizontally
 		store: new MongoStore(mongo_store_options)
 	};
-
+	app.use(flash());
 	app.use(session(session_options));
 };

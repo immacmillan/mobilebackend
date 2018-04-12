@@ -1,5 +1,7 @@
 'use strict';
-let User = require('models/User');
+let User = require('models/User'),
+	login = require('routes/login.js'),
+	habit = require('models/Habit');
 const CONST = require('components/CONST.js');
 
 /**
@@ -8,7 +10,7 @@ const CONST = require('components/CONST.js');
  * This route is unprotected for demonstrative purpose
  * but should be restricted/repourposed in the final application
  */
-module.exports = function example(req, res, next) {
+module.exports = function addUser(req, res, next) {
 	var user = new User(
 		{
 			firstname: req.body.firstname,

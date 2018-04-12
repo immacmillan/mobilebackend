@@ -12,6 +12,7 @@ module.exports = function logout(req, res) {
 			res.status(CONST.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
 		} else {
 			res.status(CONST.HTTP_STATUS_CODE.OK).end();
+			console.log('You have been logged out, thanks')
 		}
 	});
 	req.logout();

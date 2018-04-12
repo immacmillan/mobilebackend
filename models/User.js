@@ -1,7 +1,8 @@
 'use strict';
 let mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
-    validator = require('validator')
+    validator = require('validator'),
+    Habit = require('./Habit')
 /**
  * Example User Schema with a firstname, lastname, email, and password field
  */
@@ -22,7 +23,7 @@ var UserSchema = mongoose.Schema({
             message: '{VALUE} is not a valid email',
             isAsync: false
         },
-        unique:true
+        unique: true
     },    
     password: {
         type: String, 
@@ -31,7 +32,13 @@ var UserSchema = mongoose.Schema({
     created:{
         type:Date, 
         default: Date.now
-        }
+        },
+    userhabits: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Habit'
+    }],
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 /**
