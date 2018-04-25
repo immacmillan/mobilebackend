@@ -9,8 +9,6 @@ module.exports = function reset(req, res) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('/forgot');
         }
-        res.render('reset', {
-          user: req.user
-        });
+        res.send({success: true});
       });
 }

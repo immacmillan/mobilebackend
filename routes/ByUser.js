@@ -6,6 +6,8 @@ var reversePopulate = require('mongoose-reverse-populate');
             
 /**
  * This returns a list of Habits for User queried
+ * 
+ * not currently routed in index
  */
 module.exports = function getUserHabits(req, res, next) {
     return User.find({})

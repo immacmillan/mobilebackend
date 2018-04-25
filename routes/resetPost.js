@@ -1,8 +1,11 @@
 'use strict';
 let Habit = require('models/Habit'),
-    User = require('models/User').model('User');
     async = require('async'),
-    flash = require('express-flash');
+    flash = require('express-flash'),
+    User = require('models/User'),
+    crypto = require('crypto'),
+    nodemailer = require('nodemailer'),
+    passport = require('passport');
 const CONST = require('components/CONST.js');
 
 module.exports = function resetPost(req, res) {
@@ -11,7 +14,7 @@ module.exports = function resetPost(req, res) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           req.flash('error', 'Password reset token is invalid or has expired.');
-          return res.redirect('back');
+          return res.send({success: false})
         }
 
         user.password = req.body.password;
@@ -46,6 +49,6 @@ module.exports = function resetPost(req, res) {
       });
     }
   ], function(err) {
-    res.redirect('/');
+    res.send({success: true})
   });
 }
