@@ -35,7 +35,7 @@ module.exports = function(app) {
 	/**
 	 * Routes used to handle PW Reset from 'More' Page
 	 */
-	app.put('/moreReset', require('./moreReset'));
+	app.post('/moreReset', require('./moreReset'));
 
 	app.use(errorHandler);
 };
