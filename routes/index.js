@@ -1,5 +1,5 @@
 'use strict';
-let authenticate = require('middleware/authenticate');
+let authenticate = require('middleware/authenticate.js');
 let errorHandler = require('middleware/errorHandler');
 let cors = require('middleware/cors');
 
