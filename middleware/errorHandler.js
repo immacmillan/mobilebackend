@@ -16,6 +16,10 @@ function errorHandler(err, req, res, next) {		//eslint-disable-line
 		};
 		let errorName = err.name ? err.name : 'Error';
 
+
+		logger.error(err);
+
+
 		logger.error(errorName, errorObj);
 	}
 
