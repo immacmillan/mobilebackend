@@ -8,14 +8,20 @@ const CONST = require('components/CONST.js');
  * This creates a new Habit
  */
 module.exports = function addhabit(req, res, next) {
+	console.log(req);
+	console.log(req.user);
 	var userref = req.user._id;
-	
 	var newhabit = new Habit(
 		{
 			title: req.body.title,
-			description: req.body.description,
-			date: req.body.date,
-			habitBy: req.user._id	
+			habitcategory: req.body.habitcategory,
+			habitBy: req.user._id,
+			startdate: req.body.startdate,
+			targetend: req.body.targetend,
+			reminder: req.body.reminder,
+			streakcounter: req.body.streakcounter,
+			updatedAt: req.body.date,
+			customreminder: req.body.customreminder,	
 		}
 	);
 
