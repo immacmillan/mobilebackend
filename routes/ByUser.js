@@ -10,7 +10,9 @@ var reversePopulate = require('mongoose-reverse-populate');
  * not currently routed in index
  */
 module.exports = function getUserHabits(req, res, next) {
-    return User.find({})
+
+    var currentuser = req.user._id;
+    return User.find({'_id':currentuser})
                 .select('userhabits firstname lastname email')
                 .populate('userhabits')
                 .then((userswithhabits) => {

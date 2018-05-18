@@ -21,8 +21,9 @@ module.exports = function(app) {
 	 * pulling habits by user, and deleting habits. 
 	 */
 	app.post('/habitaction', require('./habitaction/POST'));	
-	app.get('/habitaction', require('./habitaction/GET'));
-	app.get('/habitaction/:id', require('./habitaction/GETBY'));
+	// app.get('/habitaction', require('./habitaction/GET'));
+	// app.get('/habitaction/:id', require('./habitaction/GETBY'));
+	app.get('/ByUser', require('./ByUser'));
 	app.delete('/habitaction/:id', require('./habitaction/DELETE'));
 	app.put('/habitaction/:id', require('./habitaction/PUT'));
 	/**
