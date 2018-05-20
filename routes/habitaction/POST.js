@@ -15,22 +15,25 @@ module.exports = function addhabit(req, res, next) {
 			title: req.body.title,
 			description: req.body.description,
 			date: req.body.date,
-			habitBy: req.user._id	
+			habitBy: req.user._id,
+			habitCategory:req.body.habitCategory,
+			
 		}
 	);
 
 	function successfulSave(response) {
 		User.findOne(userref, function (err, user) {
-				if (err) console.log(err);
-
-				user.userhabits.push(newhabit);
-				user.save();
-				console.log(user);
+				if (err) {
+					return next(err)
+				}else{
+					user.userhabits.push(newhabit);
+					user.save();
+					console.log(user);
+				}
 			})
 		return res.status(CONST.HTTP_STATUS_CODE.CREATED).send(response)
 	}
 	return newhabit.save()
-
 	.then(successfulSave)
 	.catch(next);
 };

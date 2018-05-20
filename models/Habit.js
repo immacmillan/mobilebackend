@@ -1,6 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
-    User = require('./User')
+	User = require('./User');
+const HOURSINDAY = 86400000;
 
 
 var HabitSchema = mongoose.Schema({
@@ -16,31 +17,30 @@ var HabitSchema = mongoose.Schema({
         type: String,
         enum: ['Simple', 'Complex']
     },
-	habitcategory: {
+	habitCategory: {
         type: String,
-        enum: ['First Things First', 'Physical Renewal', 'Productivity', 'Happy Home', 'Mental Renewal', 'Relationships']
     },
-	startdate: {
+	startDate: {
 		type: Date,
-		default: Date.now() + 86400000 //this is to make it so the default start date is the next day
+		default: new Date(Date.now() + HOURSINDAY*1).setHours(0,0,0,0) //this is to make it so the default start date is the next day
 	},
-	targetenddate: {
+	targetEndDate: {
 		type: Date,
-		default: Date.now() + 1814000000 //this is to account for all simple habits ending 21 days after today by default.
+		default: new Date(Date.now() + HOURSINDAY*21).setHours(0,0,0,0) //this is to account for all simple habits ending 21 days after today by default.
 	},
-	actualenddate: {
+	actualEndDate: {
 		type: Date 
 	},
-	dailyremindertime: { 
+	dailyReminderTime: { 
 		type: Date // might need to add validators depending on when Date.now() = xxx?
 	},
-	weeklyremindertime: {
+	weeklyReminderTime: {
 		type: Date // might not be needed
 	},
-	customreminderinfo: {
+	customReminderInfo: {
 		type: Date, // might not be needed
 	},
-	streakcounter: {
+	streakCounter: {
 		type: Number,
 		default: 1 // used for tracking how many continous days a Habit is performed
 	},
@@ -49,10 +49,12 @@ var HabitSchema = mongoose.Schema({
 		default: Date.now
 	},
 	updatedAt: {
-		type: Date
+		type: Date,
+		default: new Date().setHours(0,0,0,0),
 	},
 	createdAt: {
-		type: Date
+		type: Date,
+		default: new Date().setHours(0,0,0,0),
 	}
 });
 
@@ -60,7 +62,8 @@ var HabitSchema = mongoose.Schema({
  * This function is called before a habit is saved
  */
 HabitSchema.pre('save', function (next) {
-    this.createdAt = new Date;
+	this.createdAt = new Date().setHours(0,0,0,0);
+	this.targetEndDate = new 
 	next();
 });
 
@@ -68,7 +71,7 @@ HabitSchema.pre('save', function (next) {
  * This function is called before a habit is found and updated
  */
 HabitSchema.pre('findOneAndUpdate', function () {
-	this.update({}, { $set: { updatedAt: new Date() } });
+	this.update({}, { $set: { updatedAt: new Date().setHours(0,0,0,0) } });
 });
 
 

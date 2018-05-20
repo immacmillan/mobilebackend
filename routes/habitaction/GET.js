@@ -6,9 +6,11 @@ const CONST = require('components/CONST.js');
  * Example route handler for Express
  * This returns a list of Habits
  */
+
 module.exports = function getHabits(req, res, next) {
-    return Habit.find()
-                .select('title description habitBy habitcategory habittype date')
+    let founduser = req.user._id;
+    return Habit.find({ 'habitBy': founduser})
+                .select('title habitBy habitCategory updatedAt startDate streakCounter date')
                 .populate('habitBy', 'firstname lastname email _id')
                 .then((habits) => {
                     return res.json(habits);

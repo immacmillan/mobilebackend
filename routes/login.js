@@ -13,7 +13,6 @@ module.exports = function login(req, res, next) {
 		if (err) {
 			return next(err);
 		} else {
-
 			if (!user) {
 				return next({
 					status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
