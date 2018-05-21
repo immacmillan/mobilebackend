@@ -1,7 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
 	User = require('./User');
-const HOURSINDAY = 86400000;
+const MSINDAY = 86400000;
 
 
 var HabitSchema = mongoose.Schema({
@@ -15,18 +15,19 @@ var HabitSchema = mongoose.Schema({
 	description: String,
 	habittype: { 			// removed from latest strategic direction, only simple
         type: String,
-        enum: ['Simple', 'Complex']
+		enum: ['Simple', 'Complex'],
+		default: 'Simple'
     },
 	habitCategory: {
         type: String,
     },
 	startDate: {
 		type: Date,
-		default: new Date(Date.now() + HOURSINDAY*1).setHours(0,0,0,0) //this is to make it so the default start date is the next day
+		default: new Date(Date.now() + MSINDAY*1).setHours(0,0,0,0) //this is to make it so the default start date is the next day
 	},
 	targetEndDate: {
 		type: Date,
-		default: new Date(Date.now() + HOURSINDAY*21).setHours(0,0,0,0) //this is to account for all simple habits ending 21 days after today by default.
+		default: new Date(Date.now() + MSINDAY*21).setHours(0,0,0,0) //this is to account for all simple habits ending 21 days after today by default.
 	},
 	actualEndDate: {
 		type: Date 
@@ -42,7 +43,7 @@ var HabitSchema = mongoose.Schema({
 	},
 	streakCounter: {
 		type: Number,
-		default: 1 // used for tracking how many continous days a Habit is performed
+		default: 0 // used for tracking how many continous days a Habit is performed
 	},
 	date: {
 		type: Date,
@@ -50,7 +51,7 @@ var HabitSchema = mongoose.Schema({
 	},
 	updatedAt: {
 		type: Date,
-		default: new Date().setHours(0,0,0,0),
+		default: new Date(new Date().setHours(0,0,0,0)),
 	},
 	createdAt: {
 		type: Date,

@@ -12,7 +12,9 @@ module.exports = function updateHabit(req, res, next) {
 	}, {
 		title: req.body.title,
 		description: req.body.description,
-		date: req.body.date
+		date: req.body.date,
+		streakCounter: req.body.streakCounter,
+		updatedAt: new Date().setHours(0,0,0,0),
 	}).exec().then(function(results) {
 		if (results) {
 			return res.status(CONST.HTTP_STATUS_CODE.OK).send(results);
