@@ -18,7 +18,6 @@ var HabitSchema = mongoose.Schema({
     // },
 	habitcategory: {
         type: String,
-        enum: ['First Things First', 'Physical Renewal', 'Productivity', 'Happy Home', 'Mental Renewal', 'Relationships']
 	},
 	created: {
 		type: Date,
@@ -48,13 +47,16 @@ var HabitSchema = mongoose.Schema({
 	customreminder: {
 		type: Date, // might not be needed
 	},
+	activehabit: {
+		type: Boolean,
+	}
 });
 
 /**
  * This function is called before a habit is saved
  */
 HabitSchema.pre('save', function (next) {
-    this.createdAt = new Date;
+	this.createdAt = new Date;
 	next();
 });
 

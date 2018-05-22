@@ -9,6 +9,6 @@ const CONST = require('components/CONST.js');
  */
 module.exports = function forgot(req, res, next) {
 	req.render('forgot', {
-            email: req.user.email
+            // email: req.user.email
             });
         }

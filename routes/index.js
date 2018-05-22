@@ -29,7 +29,7 @@ module.exports = function(app) {
 	/**
 	 * Routes used to handle Password reset from 'Forgot Password' use case
 	 */
-	app.get('/forgot', require('./forgot'));
+	// app.get('/forgot', require('./forgot'));
 	app.post('/forgot', require('./forgotPost'));
 	app.get('/reset/:token', require('./reset'));
 	app.post('/reset/:token', require('./resetPost'));
