@@ -1,6 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
-    User = require('./User')
+	User = require('./User');
+const MSINDAY = 86400000;
 
 
 var HabitSchema = mongoose.Schema({
@@ -14,45 +15,43 @@ var HabitSchema = mongoose.Schema({
 	description: String,
 	habittype: { 			// removed from latest strategic direction, only simple
         type: String,
-        enum: ['Simple', 'Complex']
+		enum: ['Simple', 'Complex'],
+		default: 'Simple'
     },
-	habitcategory: {
+	habitCategory: {
         type: String,
-        // enum: ['First Things First', 'Physical Renewal', 'Productivity', 'Happy Home', 'Mental Renewal', 'Relationships']
     },
-	startdate: {
+	startDate: {
 		type: Date,
-		default: Date.now() + 86400000 //this is to make it so the default start date is the next day
+		default: new Date(Date.now() + MSINDAY*1).setHours(0,0,0,0) //this is to make it so the default start date is the next day
 	},
-	targetenddate: {
+	targetEnd: {
 		type: Date,
-		default: Date.now() + 1814000000 //this is to account for all simple habits ending 21 days after today by default.
+		default: new Date(Date.now() + MSINDAY*21).setHours(0,0,0,0) //this is to account for all simple habits ending 21 days after today by default.
 	},
-	actualenddate: {
+	actualend: {
 		type: Date 
+		},
+	reminder: {
+		type: Date, 
 	},
-	dailyremindertime: { 
-		type: Date // might need to add validators depending on when Date.now() = xxx?
-	},
-	weeklyremindertime: {
-		type: Date // might not be needed
-	},
-	customreminderinfo: {
-		type: Date, // might not be needed
-	},
-	streakcounter: {
+	streakCounter: {
 		type: Number,
-		default: 1 // used for tracking how many continous days a Habit is performed
-	},
-	date: {
-		type: Date,
-		default: Date.now
+		default: 0 // used for tracking how many continous days a Habit is performed
 	},
 	updatedAt: {
-		type: Date
+		type: Date,
+		default: new Date(new Date().setHours(0,0,0,0)),
 	},
 	createdAt: {
-		type: Date
+		type: Date,
+		default: new Date().setHours(0,0,0,0),
+	},
+	customReminder: {
+		type: Date, // might not be needed
+	},
+	activeHabit: {
+		type: Boolean,
 	}
 });
 
@@ -60,7 +59,7 @@ var HabitSchema = mongoose.Schema({
  * This function is called before a habit is saved
  */
 HabitSchema.pre('save', function (next) {
-    this.createdAt = new Date;
+	this.createdAt = new Date().setHours(0,0,0,0);
 	next();
 });
 
@@ -68,7 +67,7 @@ HabitSchema.pre('save', function (next) {
  * This function is called before a habit is found and updated
  */
 HabitSchema.pre('findOneAndUpdate', function () {
-	this.update({}, { $set: { updatedAt: new Date() } });
+	this.update({}, { $set: { updatedAt: new Date().setHours(0,0,0,0) } });
 });
 
 

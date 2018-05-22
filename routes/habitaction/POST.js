@@ -8,35 +8,37 @@ const CONST = require('components/CONST.js');
  * This creates a new Habit
  */
 module.exports = function addhabit(req, res, next) {
+	console.log(req.user);
 	var userref = req.user._id;
 	
+	var numofhabits = req.user.userhabits.length;
+	console.log(numofhabits);
+
 	var newhabit = new Habit(
 		{
 			title: req.body.title,
-			habitcategory: req.body.habitcategory,
+			description: req.body.description,
+			date: req.body.date,
 			habitBy: req.user._id,
-			startdate: req.body.startdate,
-			targetend: req.body.targetend,
+			habitCategory:req.body.habitCategory,
+			startDate: req.body.startDate,
+			targetEnd: req.body.targetEnd,
 			reminder: req.body.reminder,
-			streakcounter: req.body.streakcounter,
-			updatedAt: req.body.date,
-			customreminder: req.body.customreminder,
-			activehabit: req.body.activehabit,
+			streakCounter: req.body.streakCounter,
+			updatedAt: req.body.updatedAt,
+			customReminder: req.body.customReminder,
+			activehabit: req.body.activeHabit,
 		}
 	);
-
 	function successfulSave(response) {
 		User.findOne(userref, function (err, user) {
-				if (err) console.log(err);
-
-				user.userhabits.push(newhabit);
-				user.save();
-				console.log(user);
-			})
+			if (err) console.log(err);
+			user.userhabits.push(newhabit);
+			user.save();
+		});
 		return res.status(CONST.HTTP_STATUS_CODE.CREATED).send(response)
 	}
 	return newhabit.save()
-
-	.then(successfulSave)
-	.catch(next);
+		.then(successfulSave)
+		.catch(next);
 };

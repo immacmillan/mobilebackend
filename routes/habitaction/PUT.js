@@ -11,14 +11,16 @@ module.exports = function updateHabit(req, res, next) {
 		_id: req.params.id
 	}, {
 		title: req.body.title,
-		habitcategory: req.body.habitcategory,
-		startdate: req.body.startdate,
-		targetend: req.body.targetend,
+		description: req.body.description,
+		date: req.body.date,
+		streakCounter: req.body.streakCounter,
+		updatedAt: req.body.updatedAt,
+		habitCategory: req.body.habitCategory,
+		startDate: req.body.startDate,
+		targetEnd: req.body.targetEnd,
 		reminder: req.body.reminder,
-		streakcounter: req.body.streakcounter,
-		updatedAt: req.body.date,
-		customreminder: req.body.customreminder,
-		activehabit: req.body.activehabit,
+		customReminder: req.body.customReminder,
+		activeHabit: req.body.activeHabit,	
 	}).exec().then(function(results) {
 		if (results) {
 			return res.status(CONST.HTTP_STATUS_CODE.OK).send(results);
