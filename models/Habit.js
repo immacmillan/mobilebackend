@@ -18,7 +18,7 @@ var HabitSchema = mongoose.Schema({
     },
 	habitcategory: {
         type: String,
-        enum: ['First Things First', 'Physical Renewal', 'Productivity', 'Happy Home', 'Mental Renewal', 'Relationships']
+        // enum: ['First Things First', 'Physical Renewal', 'Productivity', 'Happy Home', 'Mental Renewal', 'Relationships']
     },
 	startdate: {
 		type: Date,

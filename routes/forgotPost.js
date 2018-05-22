@@ -23,7 +23,14 @@ module.exports = function forgotPost(req, res, next){
         if (!user) {
           req.flash('error', 'No account with that email address exists.');
           // return res.redirect('/forgot');
-          res.send({success: false})
+          // res.send({success: false})
+          return next({
+            status: CONST.HTTP_STATUS_CODE.UNAUTHORIZED,
+            error:{
+              success:false,
+              message:CONST.SIGNALS.BAD_EMAIL,
+            }
+          });
         }
 
         user.resetPasswordToken = token;
@@ -42,14 +49,33 @@ module.exports = function forgotPost(req, res, next){
           pass: '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'
         }
       });
+      var pwreseturl = `http://localhost:8100/#/reset/${token}`;
       var mailOptions = {
         to: user.email,
-        from: 'passwordreset@demo.com',
-        subject: 'Habit App Password Reset',
+        from: 'passwordreset@InclineD.com',
+        subject: 'Let\'s get you back on track!',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://localhost:8100/#/reset/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+        html: 
+        `<div style="font-size:14pt; width:80%; height: 100%;" align="center"><img src="cid:ForgotPWBackground@habit.com"/></div>  <br>  <br> 
+        <div style="font-size:17pt; width:80%; height: 100%;" align="center"><strong>Forgot your password?</strong></div> <br>            
+        <div style="font-size:14pt; width:80%; height: 100%;" align="center">We can help with that!</div>
+        <div align="center">&nbsp;</div>
+        <div style="font-size:14pt; width:80%; height: 100%;" align="center"><strong>Please visit the following link to reset your password: </strong></div>
+        <div style="font-size:14pt; width:80%; height: 100%;"align="center"><strong><a href = ${pwreseturl}> Reset My Password <br> </strong></div>
+        <div align="center">&nbsp;</div>
+        <div style="font-size:12pt; width:80%; height: 100%; margin-right: auto;" align="center">For security reasons, this link will expire in one hour.<br> If this link is no longer valid, please request a new password again.<br> If you believe this email was sent to you in error, please ignore this message.</div> <br> <br>
+        <div style="font-size:10pt; width:80%; height: 100%; margin-right: auto;" align="center"><em>Note: This message was sent from an unmonitored email address. Please do not reply to this email.</em></div>`,
+        attachments: [
+          // File Stream attachment
+          {
+            filename: 'ForgotPWBackground',
+            path: __dirname + '/assets/ForgotPWBackground.png',
+            cid: 'ForgotPWBackground@habit.com' // should be as unique as possible
+          }
+        ]
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
@@ -58,6 +84,7 @@ module.exports = function forgotPost(req, res, next){
     }
   ], function(err) {
     if (err) return next(err);
-    res.redirect('/forgot');
+    // res.redirect('/forgot');
+    return res.send({success: true, message: CONST.SIGNALS.GOOD_EMAIL});
   });
 }

@@ -17,7 +17,8 @@ module.exports = {
     READ_TIMEOUT: 408,
     SERVER_ERROR: 500,
     BAD_GATEWAY: 502,
-    CONNECT_TIMEOUT: 504
+    CONNECT_TIMEOUT: 504,
+    FORBIDDEN: 403,
   },
   CONTENT_TYPES : {
     JSON: 'application/json',
@@ -31,6 +32,8 @@ module.exports = {
   SIGNALS: {
     AUTH_SUCCESS: 'authentication succeeded',
     AUTH_FAILED: 'authentication failed',
-    NO_AUTH: 'User is not authenticated'
+    NO_AUTH: 'User is not authenticated',
+    BAD_EMAIL: 'Email not valid',
+    GOOD_EMAIL: 'Forgot Password link has been sent',
   }
 };
