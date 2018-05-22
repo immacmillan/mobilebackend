@@ -25,29 +25,19 @@ var HabitSchema = mongoose.Schema({
 		type: Date,
 		default: new Date(Date.now() + MSINDAY*1).setHours(0,0,0,0) //this is to make it so the default start date is the next day
 	},
-	targetEndDate: {
+	targetEnd: {
 		type: Date,
 		default: new Date(Date.now() + MSINDAY*21).setHours(0,0,0,0) //this is to account for all simple habits ending 21 days after today by default.
 	},
-	actualEndDate: {
+	actualend: {
 		type: Date 
-	},
-	dailyReminderTime: { 
-		type: Date // might need to add validators depending on when Date.now() = xxx?
-	},
-	weeklyReminderTime: {
-		type: Date // might not be needed
-	},
-	customReminderInfo: {
-		type: Date, // might not be needed
+		},
+	reminder: {
+		type: Date, 
 	},
 	streakCounter: {
 		type: Number,
 		default: 0 // used for tracking how many continous days a Habit is performed
-	},
-	date: {
-		type: Date,
-		default: Date.now
 	},
 	updatedAt: {
 		type: Date,
@@ -56,6 +46,12 @@ var HabitSchema = mongoose.Schema({
 	createdAt: {
 		type: Date,
 		default: new Date().setHours(0,0,0,0),
+	},
+	customReminder: {
+		type: Date, // might not be needed
+	},
+	activeHabit: {
+		type: Boolean,
 	}
 });
 
@@ -64,7 +60,6 @@ var HabitSchema = mongoose.Schema({
  */
 HabitSchema.pre('save', function (next) {
 	this.createdAt = new Date().setHours(0,0,0,0);
-	this.targetEndDate = new 
 	next();
 });
 

@@ -18,7 +18,7 @@ module.exports = function moreReset(req, res, next) {
 		if (err) {
 			res.status(CONST.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
 		} else {
-			res.status(CONST.HTTP_STATUS_CODE.OK).send({message:''}).end();
+			res.status(CONST.HTTP_STATUS_CODE.OK).send({message:'Failed to update user PW'}).end();
 		}
   });
 } 

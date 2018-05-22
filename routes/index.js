@@ -1,5 +1,5 @@
 'use strict';
-let authenticate = require('middleware/authenticate');
+let authenticate = require('middleware/authenticate.js');
 let errorHandler = require('middleware/errorHandler');
 let cors = require('middleware/cors');
 
@@ -22,13 +22,12 @@ module.exports = function(app) {
 	 */
 	app.post('/habitaction', require('./habitaction/POST'));	
 	app.get('/habitaction', require('./habitaction/GET'));
-	app.get('/habitaction/:id', require('./habitaction/GETBY'));
 	app.delete('/habitaction/:id', require('./habitaction/DELETE'));
 	app.put('/habitaction/:id', require('./habitaction/PUT'));
 	/**
 	 * Routes used to handle Password reset from 'Forgot Password' use case
 	 */
-	app.get('/forgot', require('./forgot'));
+	// app.get('/forgot', require('./forgot'));
 	app.post('/forgot', require('./forgotPost'));
 	app.get('/reset/:token', require('./reset'));
 	app.post('/reset/:token', require('./resetPost'));

@@ -14,7 +14,13 @@ module.exports = function updateHabit(req, res, next) {
 		description: req.body.description,
 		date: req.body.date,
 		streakCounter: req.body.streakCounter,
-		updatedAt: new Date().setHours(0,0,0,0),
+		updatedAt: req.body.updatedAt,
+		habitCategory: req.body.habitCategory,
+		startDate: req.body.startDate,
+		targetEnd: req.body.targetEnd,
+		reminder: req.body.reminder,
+		customReminder: req.body.customReminder,
+		activeHabit: req.body.activeHabit,	
 	}).exec().then(function(results) {
 		if (results) {
 			return res.status(CONST.HTTP_STATUS_CODE.OK).send(results);
