@@ -23,6 +23,7 @@ module.exports = function addUser(req, res, next) {
 		if(err) {
 			return next(err);
 		}
-		res.sendStatus(CONST.HTTP_STATUS_CODE.CREATED);
+		return res.status(CONST.HTTP_STATUS_CODE.CREATED).json({});
+		// sendStatus(CONST.HTTP_STATUS_CODE.CREATED);
 	});
 };
