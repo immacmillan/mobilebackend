@@ -9,7 +9,7 @@ let cors = require('middleware/cors');
  * Also sets the CORS headers and error handler
  */
 module.exports = function(app) {
-	app.use(cors);
+	// app.use(cors);
 	/**
 	 * Routes used for login/out, adding users.
 	 */
