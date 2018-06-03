@@ -9,7 +9,7 @@ let cors = require('middleware/cors');
  * Also sets the CORS headers and error handler
  */
 module.exports = function(app) {
-	app.use(cors); // this is used for local and commented out for prod right now
+	// app.use(cors); // this is used for local and commented out for prod right now
 	/**
 	 * Routes used for login/out, adding users.
 	 */
