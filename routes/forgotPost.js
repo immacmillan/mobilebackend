@@ -57,7 +57,7 @@ module.exports = function forgotPost(req, res, next) {
         text:
           '',
         html:
-          `<div style="font-size:14pt; width:80%; height: 100%;" align="center"><img src="cid:ForgotPWBackground@habit.com"/></div>  <br>  <br> 
+          `<div style="font-size:14pt; width:80%; height: 100%;" align="center"><img src="cid:ForgotPwBackground@habit.com"/></div>  <br>  <br> 
           <div style="font-size:17pt; width:80%; height: 100%;" align="center"><strong>Forgot your password?</strong></div> <br>            
           <div style="font-size:14pt; width:80%; height: 100%;" align="center">We can help with that!</div>
           <div align="center">&nbsp;</div>
@@ -70,9 +70,9 @@ module.exports = function forgotPost(req, res, next) {
         attachments: [
           // File Stream attachment
           {
-            filename: 'ForgotPWBackground',
-            path: __dirname + '/assets/ForgotPWBackground.png',
-            cid: 'ForgotPWBackground@habit.com' // should be as unique as possible
+            filename: 'ForgotPwBackground',
+            path: __dirname + '/assets/ForgotPwBackground.png',
+            cid: 'ForgotPwBackground@habit.com' // should be as unique as possible
           }
         ]
       };
