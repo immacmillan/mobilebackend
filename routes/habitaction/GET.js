@@ -10,7 +10,7 @@ const CONST = require('components/CONST.js');
 module.exports = function getHabits(req, res, next) {
     let founduser = req.user._id;
     return Habit.find({ 'habitBy': founduser})
-                .select('title habitBy habitCategory updatedAt targetEnd startDate streakCounter date id')
+                .select('title habitBy habitCategory updatedAt targetEnd startDate streakCounter longestStreakCounter updateCounter date reminder activeHabit id')
                 .populate('habitBy', 'firstname lastname email _id')
                 .then((habits) => {
                     return res.json(habits);
@@ -19,4 +19,3 @@ module.exports = function getHabits(req, res, next) {
                     return next(err);
                 });
             };
-            

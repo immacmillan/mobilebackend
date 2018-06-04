@@ -110,51 +110,10 @@
             -moz-border-radius: 0px 0px 15px 15px;
         }
     </style> -->
-    <script> 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' </script>
-    <script>
-        $(document).ready(function () {
-            var passOne = $("#passOne").val();
-            var passTwo = $("#passTwo").val();
-
-            $("#footerText").html("Fields don't match");
-
-            var checkAndChange = function () {
-                if (passOne.length < 1) {
-                    if ($("#footer").hasClass("correct")) {
-                        $("#footer").removeClass("correct").addClass("incorrect");
-                        $("#footerText").html("They don't match");
-                    } else {
-                        $("#footerText").html("They don't match");
-                    }
-                }
-                else if ($("#footer").hasClass("incorrect")) {
-                    if (passOne == passTwo) {
-                        $("#footer").removeClass("incorrect").addClass("correct");
-                        $("#footerText").html("Continue");
-                    }
-                }
-                else {
-                    if (passOne != passTwo) {
-                        $("#footer").removeClass("correct").addClass("incorrect");
-                        $("#footerText").html("They don't match");
-                    }
-                }
-            }
-
-
-
-            $("input").keyup(function () {
-                var newPassOne = $("#passOne").val();
-                var newPassTwo = $("#passTwo").val();
-
-                passOne = newPassOne;
-                passTwo = newPassTwo;
-
-                checkAndChange();
-            });
-        });
-    </script>
+    <script> 'http://code.jquery.com/jquery-1.9.1.js' </script>
 </head>
+
+<body>
 <div id="container">
 
     <div id="header">
@@ -163,22 +122,43 @@
         </center>
     </div>
 
-    <div class="main">
-        <form action="#" method="post" id="form">
-            <label>Password</label>
-            <input type="text" name="password" />
+    <div class="main"></div>
+    <form id="resetform" action="resetForm.php" title="" method="post">
+        <div>
+            <label class="title">Password</label>
+            <input type="text" id="password" name="password">
+        </div>
+        <div>
             <label>Confirm Password</label>
-            <input type="text" name="password2" />
-            <input type="button" id="btn" value="Reset" />
-        </form>
+            <input type="text" id="cnfpassword" name="cnfpassword">
+        </div>
+        <div>
+            <input type="submit" id="resetButton" value="Submit">
+        </div>
+    </form>
+<script>
+    $("#resetform").submit(function(event){
+        event.preventDefault();
+        var $form = $(this),
+            url = $form.attr('action');
 
-    </div>
+        var posting = $.post( url, {
+            password: $('password').val(),
+        });
+
+        posting.done(function(data){
+            alert('success');
+        });
+    });
+</script>
+</div>
+</body>
 <!--     
     <div id="footer" class="incorrect">
         <center>
             <h1 id="footerText">Filler text</h1>
         </center>
     </div> -->
-</div>
+
 
 </html>

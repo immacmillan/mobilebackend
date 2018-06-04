@@ -14,6 +14,8 @@ module.exports = function updateHabit(req, res, next) {
 		description: req.body.description,
 		date: req.body.date,
 		streakCounter: req.body.streakCounter,
+		updateCounter: req.body.updateCounter,
+		longestStreakCounter: req.body.longestStreakCounter,
 		updatedAt: req.body.updatedAt,
 		habitCategory: req.body.habitCategory,
 		startDate: req.body.startDate,
