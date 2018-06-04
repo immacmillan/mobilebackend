@@ -50,7 +50,7 @@ module.exports = function forgotPost(req, res, next) {
         }
       });
       //var pwreseturl = `http://localhost:8100/#/reset/${token}`;
-      var pwreseturl = `https://goals.digitalstudio.io/#/reset/${token}`;
+      var pwreseturl = `incline://incline.com/#/reset/${token}`;
 
       var mailOptions = {
         to: user.email,

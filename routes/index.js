@@ -36,5 +36,14 @@ module.exports = function(app) {
 	 */
 	app.post('/moreReset', require('./moreReset'));
 
+	/**
+	 * Used to generate HTML for resetting PW 
+	 */
+	var html_dir = './html/';
+
+	app.get('/resetmypw', function (req, res){
+		res.sendfile(html_dir + 'resetmypw.html');
+	});
+
 	app.use(errorHandler);
 };
