@@ -1,157 +1,241 @@
 <html>
 
 <head>
-    <!-- <style>
+    <style>
         body {
-            background: url("http://myminispot.com/images/prox.png");
+            background-image: url("http://localhost:7000/resetmypw/assets/groupat3x");
+            height: 100%;
+            width: 100%;
+            background-repeat: no-repeat;
             background-size: cover;
-        }
-
+            position: relative;
+            z-index: -999;
+        }   
         #container {
-            position: absolute;
-            background: #fff;
-            height: 350px;
-            width: 300px;
-            top: 50%;
-            left: 50%;
-            margin-left: -150px;
-            margin-top: -175px;
-
-            box-shadow: 0px 30px 150px;
-            -webkit-box-shadow: 0px 30px 150px;
-            -moz-box-shadow: 0px 30px 150px;
-
-            border-radius: 15px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
         }
 
-        #header {
-            background-color: #F26B6B;
-            font-family: 'Francois One', sans-serif;
-            height: 75px;
-            width: 300px;
-            position: absolute;
-            top: 0;
-            color: white;
-            margin-top: -2px;
-
-            border-radius: 15px 15px 0px 0px;
-            -webkit-border-radius: 15px 15px 0px 0px;
-            -moz-border-radius: 15px 15px 0px 0px;
+        div.error {
+            
+            color: red;
+            padding-left: 20px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            vertical-align: middle;
         }
 
-        #footer.incorrect {
-            background-color: #F26B6B;
-            font-family: 'Francois One', sans-serif;
-            height: 75px;
-            width: 300px;
-            position: absolute;
-            bottom: 0;
-            color: white;
-            margin-bottom: -2px;
+        /* label.error {  OR YOU CAN USE THIS IF YOU HAVE TROUBLE WITH THE DIV
 
-            border-radius: 0px 0px 15px 15px;
-            -webkit-border-radius: 0px 0px 15px 15px;
-            -moz-border-radius: 0px 0px 15px 15px;
+        } */
+
+        .Rectangle {
+            width: 1024px;
+            height: 830px;
+            /* background-color: #ffffff;
+            background-color: var(--white-two); */
         }
 
-        #footer.correct {
-            background-color: #84F075;
-            font-family: 'Francois One', sans-serif;
-            height: 75px;
-            width: 300px;
-            position: absolute;
-            bottom: 0;
-            color: white;
-            cursor: pointer;
-            margin-bottom: -2px;
-
-            border-radius: 0px 0px 15px 15px;
-            -webkit-border-radius: 0px 0px 15px 15px;
-            -moz-border-radius: 0px 0px 15px 15px;
+        .Background {
+            width: 1024px;
+            height: 905px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            background-color: var(--white-two);
+            box-shadow: 0 25px 65px 0 rgba(0, 0, 0, 0.1), 0 23px 38px 0 rgba(0, 0, 0, 0.43), 0 0 0.5px 0.5px rgba(0, 0, 0, 0.3);
         }
 
-        #form {
-            height: 100px;
-            position: absolute;
-            top: 50%;
-            margin-top: -50px;
-            width: 75%;
-            left: 50%;
-            margin-left: -37.5%;
+        #container {}
+
+        #header {}
+        #resetButton {
+            align-items: center;
+        }
+        #resetForm {
+            margin: 0 auto;
+            padding-top: 15px;
+            width: 380px;
+            height: 651px;
+            background-color: #ffffff !important;
+            background-color: var(--white-two);
+            box-shadow: 4px 4px 10px 0 rgba(155, 155, 155, 0.56);
+        }
+
+
+        /**
+          * Make the field a flex-container, reverse the order so label is on top.
+          */
+
+        .field {
+            display: flex;
+            margin-bottom: 1em;
+            padding-left: 3px;
+        }
+
+        /**
+          * Add a transition to the label and input.
+          * I'm not even sure that touch-action: manipulation works on
+          * inputs, but hey, it's new and cool and could remove the 
+          * pesky delay.
+          */
+
+        label,
+        input {
+            transition: all 0.2s;
+            touch-action: manipulation;
         }
 
         input {
-            width: 215px;
-            margin: 0;
+            font-size: 1.5em;
             border: 0;
-            border-left: 1px solid;
-            border-right: 1px solid;
-            outline: none;
-            height: 50px;
-            font-size: 20px;
-            padding-left: 10px;
+            border-bottom: 1px solid #ccc;
+            font-family: inherit;
+            -webkit-appearance: none;
+            border-radius: 0;
+            padding: 0;
+            cursor: text;
         }
 
-        input#passOne {
-            border-top: 1px solid;
-            border-radius: 15px 15px 0px 0px;
-            -webkit-border-radius: 15px 15px 0px 0px;
-            -moz-border-radius: 15px 15px 0px 0px;
+        input:focus {
+            outline: 0;
+            border-bottom: 1px solid #666;
         }
 
-        input#passTwo {
-            border-bottom: 1px solid;
-            border-top: 1px solid;
-
-            border-radius: 0px 0px 15px 15px;
-            -webkit-border-radius: 0px 0px 15px 15px;
-            -moz-border-radius: 0px 0px 15px 15px;
+        label {
+            letter-spacing: 0.05em;
         }
-    </style> -->
-    <script> 'http://code.jquery.com/jquery-1.9.1.js' </script>
+
+        /**
+          * Translate down and scale the label up to cover the placeholder,
+          * when following an input (with placeholder-shown support).
+          * Also make sure the label is only on one row, at max 2/3rds of the
+          * field—to make sure it scales properly and doesn't wrap.
+          */
+
+        input:placeholder-shown+label {
+            cursor: text;
+            max-width: 66.66%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transform-origin: left bottom;
+            transform: translate(0, 2.125rem) scale(1.5);
+        }
+
+        /**
+          * By default, the placeholder should be transparent. Also, it should 
+          * inherit the transition.
+          */
+
+        ::-webkit-input-placeholder {
+            opacity: 0;
+            transition: inherit;
+        }
+
+        /**
+          * Show the placeholder when the input is focused.
+          */
+
+        input:focus::-webkit-input-placeholder {
+            opacity: 1;
+        }
+
+        /**
+          * When the element is focused, remove the label transform.
+          * Also, do this when the placeholder is _not_ shown, i.e. when 
+          * there's something in the input at all.
+          */
+
+        input:not(:placeholder-shown)+label,
+        input:focus+label {
+            transform: translate(0, 0) scale(1);
+            cursor: pointer;
+        }
+
+        input#password {}
+
+        input#cnfpassword {}
+
+        input#resetButton {}
+    </style>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 </head>
 
-<body>
-<div id="container">
+        <body>
+    <div id="container">
 
-    <div id="header">
-        <center>
-            <h1>Change Password</h1>
-        </center>
+        <div id="header">
+            <center>
+                <h1>Change Password</h1>
+            </center>
+        </div>
+
+
+        <form id="resetForm" title="" method="post">
+            <img src="http://localhost:7000/resetmypw/assets/groupat3x" alt="" />
+            <div class='field'>
+                <label for='password'>New Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class='field'>
+                <label for='cnfpassword'>Confirm Password</label>
+                <input type="password" id="cnfpassword" name="cnfpassword">
+            </div>
+            <div class='btn'>
+                <input type="submit" id="resetButton" value="Submit">
+            </div>
+        </form>
+        <script>
+            $(document).ready(function () {
+                //$('body').css('background-image', $(this).attr('groupto3x.png'));
+                $('#resetForm').validate({
+                    errorElement: 'div',
+                    rules: {
+                        password: {
+                            required: true,
+                            minlength: 8
+                        },
+                        cnfpassword: {
+                            equalTo: '#password',
+                            minlength: 8
+                        }
+                    },
+                    messages: {
+                        password: {
+                            required: 'The password is required'
+                        },
+                        cnfpassword: {
+                            equalTo: 'The passwords do not match'
+                        }
+                    },
+                    submitHandler: function (form) {
+                        //var formdata = $(form).serialize();
+                        // url should be something like this https://goals.digitalstudio.io/reset/94bbbd637d458b26083d45ab1e868cfe56780418 
+                        var pathArray = window.location.pathname.split('/');
+                        var parsedToken = pathArray[2];
+                        var formpw = $('input#password').val();
+                        var update = {
+                            'token': parsedToken,
+                            'password': formpw,
+                        }
+                        // return console.log(update);
+                        $.ajax({
+                            //url: 'https://goals.digitalstudio.io/reset',
+                            url: '/reset',
+                            type: 'POST',
+                            data: update,
+                            success: function (data) {
+                                return alert('Your password has been reset sucessfully! Go to Incline & Login!');
+                            },
+                            error: function (err) {
+                                return alert(err);
+                            }
+                        });
+                    },
+                });
+            });
+        </script>
     </div>
-
-    <div class="main"></div>
-    <form id="resetform" action="resetForm.php" title="" method="post">
-        <div>
-            <label class="title">Password</label>
-            <input type="text" id="password" name="password">
-        </div>
-        <div>
-            <label>Confirm Password</label>
-            <input type="text" id="cnfpassword" name="cnfpassword">
-        </div>
-        <div>
-            <input type="submit" id="resetButton" value="Submit">
-        </div>
-    </form>
-<script>
-    $("#resetform").submit(function(event){
-        event.preventDefault();
-        var $form = $(this),
-            url = $form.attr('action');
-
-        var posting = $.post( url, {
-            password: $('password').val(),
-        });
-
-        posting.done(function(data){
-            alert('success');
-        });
-    });
-</script>
-</div>
 </body>
 <!--     
     <div id="footer" class="incorrect">

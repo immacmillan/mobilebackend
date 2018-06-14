@@ -2,6 +2,7 @@
 let authenticate = require('middleware/authenticate.js');
 let errorHandler = require('middleware/errorHandler');
 let cors = require('middleware/cors');
+var path = require('path');
 
 /**
  * Top-level route definitions
@@ -29,21 +30,31 @@ module.exports = function(app) {
 	 */
 	// app.get('/forgot', require('./forgot'));
 	app.post('/forgot', require('./forgotPost'));
-	app.get('/reset/:token', require('./reset'));
-	app.post('/reset/:token', require('./resetPost'));
+	// app.get('/reset/:token', require('./reset'));
+	// app.post('/reset/:token', require('./resetPost'));
+	app.post('/reset', require('./reset'));
 	/**
 	 * Routes used to handle PW Reset from 'More' Page
 	 */
 	app.post('/moreReset', require('./moreReset'));
 
 	/**
-	 * Used to generate HTML for resetting PW 
+	 * Used to generate HTML for resetting PW from forgot email link
 	 */
-	var html_dir = './html/';
+	//var html_dir = './html/';
+	var pathe = path.resolve(__dirname,'../html/resetmypw.html');
 
-	app.get('/resetmypw', function (req, res){
-		res.sendfile(html_dir + 'resetmypw.html');
+	app.get('/resetmypw/:token', function (req, res){ 
+		res.sendFile(pathe);
+		// res.sendfile(html_dir + 'resetmypw.html');
 	});
-
+	var groupat3x = path.resolve(__dirname,'../html/assets/group@3x.png');
+	app.get('/resetmypw/assets/groupat3x', function(req,res){
+		res.sendFile(groupat3x);
+	});
+	var resetpwimg = path.resolve(__dirname,'../html/assets/resetPassword.png');
+	app.get('/resetmypw/assets/', function(req,res){
+		res.sendFile(resetpwimg);
+	});
 	app.use(errorHandler);
 };

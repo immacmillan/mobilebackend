@@ -10,5 +10,6 @@ module.exports = function() {
 
 	return mongoose.connect(CONST.ENV.MONGO_DB, {
 		/* other options */
+		
 	});
 };

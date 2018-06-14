@@ -49,8 +49,8 @@ module.exports = function forgotPost(req, res, next) {
           pass: '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'
         }
       });
-      //var pwreseturl = `http://localhost:8100/#/reset/${token}`;
-      var pwreseturl = `incline://incline.com/#/reset/${token}`;
+      // var pwreseturl = `http://localhost:7000/resetmypw/${token}`;
+      var pwreseturl = `https://goals.digitalstudio.io/resetmypw/${token}`;
 
       var mailOptions = {
         to: user.email,
