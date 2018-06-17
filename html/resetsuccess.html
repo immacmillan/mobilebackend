@@ -63,10 +63,6 @@
             color: #000000;
         }
 
-        #resetButton {
-            align-items: center;
-        }
-
         #resetForm {
             margin: 0 auto;
             margin-top: 170px;
@@ -174,52 +170,70 @@
 
         input#cnfpassword {}
 
-        input#resetButton {}
+        input#resetButton {
+            align-items: center;
+        }
 
+        #groupimg{
+
+        }
         #plane {
-            position: absolute;
-            top: 535;
-            left: 346;
-            z-index: 2;
+            position: fixed;
+            margin-top: -840px;
+            margin-left: 50%;
+            /* margin-top: -330px;
+            margin-left: 10px; */
         }
 
         #path {
             position: absolute;
-            top: 650;
-            left: 0;
-            z-index: 2;
+            margin-top: -660px;
+            margin-left: 50%;
         }
 
-        .has-float-label{
+        .has-float-label {
             margin-left: 100px;
             width: 500px;
             height: 150px;
             font-size: 16px;
-            
+
         }
-        .has-float-label label, .has-float-label>span {
+
+        .has-float-label label,
+        .has-float-label>span {
             top: -22 !important;
             font-size: 140% !important;
         }
-        .has-float-label input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
+
+        .has-float-label input:placeholder-shown:not(:focus)+*,
+        .has-float-label select:placeholder-shown:not(:focus)+*,
+        .has-float-label textarea:placeholder-shown:not(:focus)+* {
             border-bottom: slategray !important;
             border-bottom-width: 300px !important;
         }
-        .has-float-label input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
+
+        .has-float-label input:placeholder-shown:not(:focus)+*,
+        .has-float-label select:placeholder-shown:not(:focus)+*,
+        .has-float-label textarea:placeholder-shown:not(:focus)+* {
             font-size: 90% !important;
         }
-        #resetButton{
+
+        h2 {
             width: 255px;
-            height: 44px;
-            background-color: #e6e6e6;
-            border-bottom: none;
-            margin-top: -20px;
+            height: 22px;
+            font-family: Lato;
+            font-size: 24px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #0477d6;
+            margin-top: -50px;
+            margin-bottom: 100px;
+            margin-left: -44px;
         }
-        #resetButton:valid, #resetButton:focus{
-            cursor: pointer;
-        }
-        
-        
     </style>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -233,87 +247,41 @@
             <div id="header">
                 <center>
                     <!-- <h1><img id="resetPwId" src="http://localhost:7000/resetmypw/assets/resetPassword@2x" alt="resetPasswordTitle" /></h1> -->
-                    <h1>Reset Password</h1>
+                    <h1>Congratulations!</h1>
+
+                    <h2 id='congrats'>Your password is set!</h2>
                 </center>
             </div>
             <div class='has-float-label'>
-                
-                    <input type="password" id="password" name="password" placeholder="New Password">
-                    <label for='password'>New Password</label>
-                
+
+                <input type="password" id="password" name="password" placeholder="xxxxxxxxxxx">
+                <label for='password'>xxxxxxxxxx</label>
+
             </div>
             <div class='has-float-label'>
-                
-                    <input type="password" id="cnfpassword" name="cnfpassword" placeholder="Confirm Password">
-                    <label for='cnfpassword'>Confirm Password</label>
-                
+
+                <input type="password" id="cnfpassword" name="cnfpassword" placeholder="Thanks for Confirming">
+                <label for='cnfpassword'>Thanks for confirming</label>
+
             </div>
-            <div class='btn'>
-                <center>
-                    <input type="submit" id="resetButton" value="Reset" />
-                </center>
-            </div>
+
         </form>
-        <img id='plane' src='http://localhost:7000/resetmypw/assets/plane' alt='paperPlane' />
-        <img id='path' src='http://localhost:7000/resetmypw/assets/flightpath' alt='Flight Path' />
+        <div id='groupimg'>
+            <img id='path' src='http://localhost:7000/resetmypw/assets/flightpath2' alt='Flight Path' />                
+            <img id='plane' src='http://localhost:7000/resetmypw/assets/plane' alt='paperPlane' />
+        </div>
         <script>
             $(document).ready(function () {
+
                 //$('body').css('background-image', $(this).attr('groupto3x.png'));
-                $('#resetButton').on('blur keyup', function() {
-                    if ($('#resetForm').valid()){
-                        $('#resetButton').css({'background-color':'blue'}); 
-                    } 
-                });
-                $('#resetForm').validate({
-                    onfocusout: function(element){
-                        this.element(element);
-                    },
-                    errorElement: 'div',
-                    rules: {
-                        password: {
-                            required: true,
-                            minlength: 8
-                        },
-                        cnfpassword: {
-                            equalTo: '#password',
-                            minlength: 8
-                        }
-                    },
-                    messages: {
-                        password: {
-                            required: 'The password is required'
-                        },
-                        cnfpassword: {
-                            equalTo: 'The passwords do not match'
-                        }
-                    },
-                    submitHandler: function (form) {
-                        //var formdata = $(form).serialize();
-                        // url should be something like this https://goals.digitalstudio.io/reset/94bbbd637d458b26083d45ab1e868cfe56780418 
-                        var pathArray = window.location.pathname.split('/');
-                        var parsedToken = pathArray[2];
-                        var formpw = $('input#password').val();
-                        var update = {
-                            'token': parsedToken,
-                            'password': formpw,
-                        }
-                        // return console.log(update);
-                        $.ajax({
-                            //url: 'https://goals.digitalstudio.io/reset',
-                            url: '/reset',
-                            type: 'POST',
-                            data: update,
-                            success: function (data) {
-                                window.location.href = '../resetsuccess';
-                                return alert('Your password has been reset sucessfully! Go to Incline & Login!');
-                            },
-                            error: function (err) {
-                                return alert(err);
-                            }
-                        });
-                    },
-                });
+
             });
+            // $(document).on(function(){
+            //         if($('#resetForm').valid()){
+            //             $('resetButton').css({'background-color':'blue'});
+            //         }
+            //     });
+
         </script>
     </div>
 </body>

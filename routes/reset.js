@@ -23,18 +23,6 @@ module.exports = function reset(req, res, next) {
         }
         else {
             return res.statusStatus(CONST.HTTP_STATUS_CODE.NOT_FOUND);
-}   .exec((error, user) => {
-        console.log(user);
-        if (error) return console.log(error);
-        if (!user) return console.log('Password reset token is invalid or has expired');
-        if (user) {
-            user.password = req.body.password;
-            user.save();
-            console.log('Password sucessfully updated');
-            return res.status(CONST.HTTP_STATUS_CODE.OK).send(user);
-        }
-        else {
-            return res.statusStatus(CONST.HTTP_STATUS_CODE.NOT_FOUND);
         } 
     })
 };
