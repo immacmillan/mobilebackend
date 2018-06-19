@@ -23,7 +23,6 @@ module.exports = function addhabit(req, res, next) {
 		{
 			title: req.body.title,
 			description: req.body.description,
-			date: req.body.date,
 			habitBy: req.user._id,
 			habitCategory: req.body.habitCategory,
 			startDate: req.body.startDate,
@@ -31,7 +30,6 @@ module.exports = function addhabit(req, res, next) {
 			reminder: req.body.reminder,
 			streakCounter: req.body.streakCounter,
 			updatedAt: req.body.updatedAt,
-			customReminder: req.body.customReminder,
 			activehabit: req.body.activeHabit,
 			customId: customIdPlus,
 		}

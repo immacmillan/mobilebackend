@@ -261,16 +261,10 @@
         
         <script>
             $(document).ready(function () {
-                //$('body').css('background-image', $(this).attr('groupto3x.png'));
-                $('#resetButton').on('blur keyup', function() {
-                    if ($('#resetForm').valid()){
-                        $('#resetButton').css({'background-color':'blue'}); 
-                    } 
-                });
                 $('#resetForm').validate({
-                    onfocusout: function(element){
-                        this.element(element);
-                    },
+                    // onfocusout: function(element){
+                    //     this.element(element);
+                    // },
                     errorElement: 'div',
                     rules: {
                         password: {
@@ -278,9 +272,10 @@
                             minlength: 8
                         },
                         cnfpassword: {
+                            required: true,
                             equalTo: '#password',
-                            minlength: 8
-                        }
+                            minlength: 8,
+                        },
                     },
                     messages: {
                         password: {
@@ -290,6 +285,16 @@
                             equalTo: 'The passwords do not match'
                         }
                     },
+                    success: function(label){
+                        console.log('thisworked');
+                        $('#resetButton').css({'background-color':'#097ed5'});
+                        $('#resetButton').css({'color':'white'});
+                        $('#resetButton').css({'font-weight':'normal'});
+                        // if($(label).attr('cnfpassword') == 'true'){
+                        //     console.log('thisworked');
+                        //     $(label).css({'background-color':'#097ed5'});
+                        // }  
+                     },
                     submitHandler: function (form) {
                         //var formdata = $(form).serialize();
                         // url should be something like this https://goals.digitalstudio.io/reset/94bbbd637d458b26083d45ab1e868cfe56780418 
@@ -316,6 +321,7 @@
                         });
                     },
                 });
+                
             });
         </script>
     </div>

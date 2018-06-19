@@ -1,13 +1,13 @@
 'use strict';
 var passport = require('passport'),
-		LocalStrategy = require('passport-local').Strategy,
-		User = require('models/User');
+	LocalStrategy = require('passport-local').Strategy,
+	User = require('models/User');
 
 /**
  * Use Passport for authentication
  * @link http://passportjs.org/docs
  */
-module.exports = function(app) {
+module.exports = function (app) {
 	/**
 	* In order to restore authentication state across HTTP requests, Passport needs
 	* to serialize users into and deserialize users out of the session.  The
@@ -15,13 +15,13 @@ module.exports = function(app) {
 	* serializing, and querying the user record by ID from the database when
 	* deserializing.
 	*/
-	
+
 	passport.serializeUser((user, cb) => {
 		cb(null, user.id);
 	});
 
 	passport.deserializeUser((id, cb) => {
-		User.findById(id).then((user) =>{
+		User.findById(id).then((user) => {
 			cb(null, user);
 		}).catch((err) => {
 			return cb(err);
@@ -35,19 +35,19 @@ module.exports = function(app) {
 	* will be set at `req.user` in route handlers after authentication.
 	*/
 	let localStrategy = new LocalStrategy(
-		{usernameField: 'email'},
-		function(email, password, done) {
+		{ usernameField: 'email' },
+		function (email, password, done) {
 			User.findOne({ email: email }).then((user) => {
-				if (!user) { return done(null, false,{message:'Wrong Email'}); }
+				if (!user) { return done(null, false, { message: 'Wrong Email' }); }
 
 				return user.validatePassword(password).then((isMatch) => {
-					if(!isMatch) {
-						return done(null, false,{message:'Wrong Password'});
+					if (!isMatch) {
+						return done(null, false, { message: 'Wrong Password' });
 					} else {
 						return done(null, user);
 					}
 				});
-			}).catch(function(error) {
+			}).catch(function (error) {
 				return done(error);
 			});
 		}

@@ -12,7 +12,6 @@ module.exports = function updateHabit(req, res, next) {
 	}, {
 		title: req.body.title,
 		description: req.body.description,
-		date: req.body.date,
 		streakCounter: req.body.streakCounter,
 		updateCounter: req.body.updateCounter,
 		longestStreakCounter: req.body.longestStreakCounter,
@@ -21,7 +20,6 @@ module.exports = function updateHabit(req, res, next) {
 		startDate: req.body.startDate,
 		targetEnd: req.body.targetEnd,
 		reminder: req.body.reminder,
-		customReminder: req.body.customReminder,
 		activeHabit: req.body.activeHabit,	
 	}).exec().then(function(results) {
 		if (results) {

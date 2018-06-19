@@ -8,14 +8,31 @@ const CONST = require('components/CONST.js');
  */
 
 module.exports = function getHabits(req, res, next) {
+    let props = 'title habitBy habitCategory updatedAt targetEnd startDate streakCounter longestStreakCounter updateCounter reminder activeHabit id customId';    
     let founduser = req.user._id;
-    return Habit.find({ 'habitBy': founduser})
-                .select('title habitBy habitCategory updatedAt targetEnd startDate streakCounter longestStreakCounter updateCounter date reminder activeHabit id')
-                .populate('habitBy', 'firstname lastname email _id')
-                .then((habits) => {
-                    return res.json(habits);
-                })
-                .catch((err) => {
-                    return next(err);
-                });
-            };
+    if (req.params.id) {
+        return Habit.find({
+            '_id' : req.params.id
+        })
+        .select(props)
+        .populate('habitBy','firstname lastname email _id')
+        .then((habits) => {
+            return res.json(habits);
+        })
+        .catch((err) => {
+            return next(err);
+        });
+    } else {
+        return Habit.find({
+                'habitBy': founduser
+            })
+            .select(props)
+            .populate('habitBy', 'firstname lastname email _id')
+            .then((habits) => {
+                return res.json(habits);
+            })
+            .catch((err) => {
+                return next(err);
+            });
+    }
+};

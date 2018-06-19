@@ -16,11 +16,6 @@ var HabitSchema = mongoose.Schema({
 		ref: 'User'
 	}],
 	description: String,
-	habittype: { 			// removed from latest strategic direction, only simple
-		type: String,
-		enum: ['Simple', 'Complex'],
-		default: 'Simple'
-	},
 	habitCategory: {
 		type: String,
 	},
@@ -31,9 +26,6 @@ var HabitSchema = mongoose.Schema({
 	targetEnd: {
 		type: Date,
 		default: new Date(Date.now() + MSINDAY * 21).setHours(0, 0, 0, 0) //this is to account for all simple habits ending 21 days after today by default.
-	},
-	actualend: {
-		type: Date
 	},
 	reminder: {
 		type: Date,
@@ -58,11 +50,9 @@ var HabitSchema = mongoose.Schema({
 		type: Date,
 		default: new Date().setHours(0, 0, 0, 0),
 	},
-	customReminder: {
-		type: Date, // might not be needed
-	},
 	activeHabit: {
 		type: Boolean,
+		default: true,
 	},
 	customId: {
 		type: Number,

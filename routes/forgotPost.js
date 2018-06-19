@@ -54,20 +54,20 @@ module.exports = function forgotPost(req, res, next) {
 
       var mailOptions = {
         to: user.email,
-        from: 'passwordreset@InclineD.com',
+        from: 'passwordreset@Incline.com',
         subject: 'Let\'s get you back on track!',
         text:
           '',
         html:
-          `<div style="font-size:14pt; width:80%; height: 100%;" align="center"><img src="cid:ForgotPwBackground@habit.com"/></div>  <br>  <br> 
-          <div style="font-size:17pt; width:80%; height: 100%;" align="center"><strong>Forgot your password?</strong></div> <br>            
-          <div style="font-size:14pt; width:80%; height: 100%;" align="center">We can help with that!</div>
+          `<div style="font-size:14pt; width:60%; height: 80%;" align="center"><img src="cid:ForgotPwBackground@habit.com" height="270" width="650"/></div>  <br>  <br> 
+          <div style="font-size:17pt; width:60%; height: 80%;" align="center"><strong>Forgot your password?</strong></div> <br>            
+          <div style="font-size:14pt; width:60%; height: 80%;" align="center">We can help with that!</div>
           <div align="center">&nbsp;</div>
-          <div style="font-size:14pt; width:80%; height: 100%;" align="center"><strong>Please visit the following link to reset your password: </strong></div>
-          <div style="font-size:14pt; width:80%; height: 100%;"align="center"><strong><a href = ${pwreseturl}> Reset My Password <br> </strong></div>
+          <div style="font-size:14pt; width:60%; height: 80%;" align="center"><strong>Please visit the following link to reset your password: </strong></div>
+          <div style="font-size:14pt; width:60%; height: 80%;"align="center"><strong><a href = ${pwreseturl}> Reset My Password <br> </strong></div>
           <div align="center">&nbsp;</div>
-          <div style="font-size:12pt; width:80%; height: 100%; margin-right: auto;" align="center">For security reasons, this link will expire in one hour.<br> If this link is no longer valid, please request a new password again.<br> If you believe this email was sent to you in error, please ignore this message.</div> <br> <br>
-          <div style="font-size:10pt; width:80%; height: 100%; margin-right: auto;" align="center"><em>Note: This message was sent from an unmonitored email address. Please do not reply to this email.</em></div>`,
+          <div style="font-size:12pt; width:60%; height: 80%; margin-right: auto;" align="center">For security reasons, this link will expire in one hour.<br> If this link is no longer valid, please request a new password again.<br> If you believe this email was sent to you in error, please ignore this message.</div> <br> <br>
+          <div style="font-size:10pt; width:60%; height: 80%; margin-right: auto;" align="center"><em>Note: This message was sent from an unmonitored email address. Please do not reply to this email.</em></div>`,
         // An array of attachments
         attachments: [
           // File Stream attachment
