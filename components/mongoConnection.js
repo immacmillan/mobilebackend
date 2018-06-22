@@ -11,7 +11,6 @@ module.exports = function() {
 	return mongoose.connect(CONST.ENV.MONGO_DB, {
 		/* other options */
 		keepAlive: 1, 
-		connectTimeoutMS: 30000, 
 		reconnectTries: 30, 
 		reconnectInterval: 5000,
 	});
