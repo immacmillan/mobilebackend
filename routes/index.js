@@ -39,20 +39,17 @@ module.exports = function(app) {
 	app.post('/moreReset', require('./moreReset'));
 
 	/**
-	 * Used to generate HTML for resetting PW from forgot email link
+	 * All the assets pulled for the reset pages
 	 */
-	//var html_dir = './html/';
 	var pathe = path.resolve(__dirname,'../html/resetmypw.html')
 	app.get('/resetmypw/:token', function (req, res){ 
 		res.sendFile(pathe);
-		// res.sendfile(html_dir + 'resetmypw.html');
 	});
 	var pathe2 = path.resolve(__dirname,'../html/resetsuccess.html')
 	app.get('/resetsuccess', function (req, res){ 
 		res.sendFile(pathe2);
-		// res.sendfile(html_dir + 'resetmypw.html');
 	});
-	var groupat3x = path.resolve(__dirname,'../html/assets/group@3x.png');
+	var groupat3x = path.resolve(__dirname,'../html/assets/backGroundImg.png');
 	app.get('/resetmypw/assets/groupat3x', function(req,res){
 		res.sendFile(groupat3x);
 	});
@@ -72,5 +69,10 @@ module.exports = function(app) {
 	app.get('/resetmypw/assets/flightpath2', function(req,res){
 		res.sendFile(flightPath2);
 	});
+	var resetLogo = path.resolve(__dirname,'../html/assets/group@2x.png');
+	app.get('/resetmypw/assets/resetLogo', function(req,res){
+		res.sendFile(resetLogo);
+	});
+	
 	app.use(errorHandler);
 };
