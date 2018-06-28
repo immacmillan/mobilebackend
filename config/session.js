@@ -22,7 +22,8 @@ module.exports = function(app) {
 	};
 
 	const mongo_store_options = {
-		url: CONST.ENV.MONGO_DB
+		url: CONST.ENV.MONGO_DB,
+		// autoRemove: 'disabled',
 	};
 
 	const session_options = {
