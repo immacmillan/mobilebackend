@@ -15,7 +15,7 @@ module.exports = function login(req, res, next) {
 		} else {
 			if (!user) {
 				return next({
-					status: CONST.HTTP_STATUS_CODE.OK,
+					status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
 					error: {
 						success: false,
 						message:CONST.SIGNALS.AUTH_FAILED
@@ -26,7 +26,7 @@ module.exports = function login(req, res, next) {
 				req.login(user, function(err) {
 					if (err) {
 						return next({
-							status: CONST.HTTP_STATUS_CODE.OK,
+							status: CONST.HTTP_STATUS_CODE.UNAUTHENTICATED,
 							error:{
 								success:false,
 								message:CONST.SIGNALS.AUTH_FAILED
