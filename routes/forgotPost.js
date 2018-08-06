@@ -46,7 +46,7 @@ module.exports = function forgotPost(req, res, next) {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: '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'
+          pass: '*****'
         }
       });
       // var pwreseturl = `http://localhost:7000/resetmypw/${token}`;

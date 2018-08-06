@@ -33,7 +33,7 @@ module.exports = function resetPost(req, res) {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: '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'
+          pass: '*********'
         }
       });
       var mailOptions = {

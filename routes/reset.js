@@ -44,7 +44,7 @@ module.exports = function reset(req, res, next) {
                 service: 'SendGrid',
                 auth: {
                     user: 'apikey',
-                    pass: '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'
+                    pass: '****'
                 }
             });
             // var pwreseturl = `https://goals.digitalstudio.io/resetmypw/${token}`;
